@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,29 +11,23 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (isPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+       
     }
-    void Resume()
+    public void Resume()
     {
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
 
-    private void  Pause()
+    public void  Pause(InputAction.CallbackContext context)
     {
-        PauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
+        if (context.performed)
+        {
+            PauseMenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            isPaused = true;
+
+        }
     }
 }
