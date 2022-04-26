@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class ppp : MonoBehaviour
@@ -35,31 +36,46 @@ public class ppp : MonoBehaviour
     {
         if (!isPaused)
         {
-            PauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
-            isPaused = true;
+            Paused();
 
         }
         else
         {
-            PauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            isPaused = false;
+            Resume();
         }
     }
 
-    
-    private void Action_started(InputAction.CallbackContext obj)
+    void Paused()
     {
-        
-        Debug.Log("lalalalalalalalalala");
-        
-        Pause();
-        
-        throw new System.NotImplementedException();
-        
+        PauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
 
-        
+    public void Resume()
+    {
+        PauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
+    public void LoadMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("J-MSceneMenu");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+
+
+
+    private void Action_started(InputAction.CallbackContext obj)
+    {     
+        Pause();
+        throw new System.NotImplementedException();       
     }
 
 }
