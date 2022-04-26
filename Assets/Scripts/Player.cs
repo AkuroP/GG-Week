@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
     public int maxJumpCount;
     [SerializeField]
     private int jumpCount;
-    [SerializeField]
-    private bool isGrounded;
+    
+    public bool isGrounded;
     [SerializeField]
     private bool hasJumped;
     [SerializeField]
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     public GameObject lifeDimension;
     public GameObject deathDimension;
     [SerializeField]
-    private bool lifeOrDeath;
+    public bool lifeOrDeath;
 
 
     // Start is called before the first frame update
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         jumpCount = maxJumpCount;
+        
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -50,6 +51,11 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(horizontalMove * playerSpeed, rb.velocity.y);
         GroundCheck();
         
+    }
+
+    private void OnDestroy()
+    {
+
     }
 
     //interverti entre le monde des vivant et le monde des morts
