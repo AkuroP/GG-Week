@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     public GameObject bulletParent;
     public GameObject bulletParent2;
     private Transform player;
+
+    public int damageOnCollision = 20;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -50,5 +52,14 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position,lineOfSite);
         Gizmos.DrawWireSphere(transform.position, shootingRange);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.transform.GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(damageOnCollision);
+        }
     }
 }
