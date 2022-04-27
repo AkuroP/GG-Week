@@ -24,14 +24,23 @@ public class Player : MonoBehaviour
     public float raycastDistance;
     public LayerMask whatIsGround;
 
-    [Header("Dimension Switch")]
     [Header("True = Life; False = Death")]
+    [Header("Dimension Switch")]
     public GameObject lifeDimension;
     public GameObject deathDimension;
     [SerializeField]
     public bool lifeOrDeath;
 
-
+    [Header("Interaction")]
+    public GameObject interactableObj;
+    public bool canInteract;
+    
+    [Header("Attack")]
+    public Transform hitBoxPointLeft;
+    public Transform hitBoxPointRight;
+    private Transform hitBoxPoint = null;
+    public float attackRange;
+    public LayerMask enemyLayer;
     // Start is called before the first frame update
     
     private void Awake()
@@ -43,7 +52,7 @@ public class Player : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         jumpCount = maxJumpCount;
-        
+        hitBoxPoint = hitBoxPointRight;
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -51,11 +60,6 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(horizontalMove * playerSpeed, rb.velocity.y);
         GroundCheck();
         
-    }
-
-    private void OnDestroy()
-    {
-
     }
 
     //interverti entre le monde des vivant et le monde des morts
@@ -87,10 +91,12 @@ public class Player : MonoBehaviour
             if(horizontalMove < 0)
             {
                 this.GetComponent<SpriteRenderer>().flipX = true;
+                hitBoxPoint = hitBoxPointLeft; 
             }
             else
             {
                 this.GetComponent<SpriteRenderer>().flipX = false;
+                hitBoxPoint = hitBoxPointRight; 
             }
         }
     }
@@ -112,6 +118,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if(context.performed && canInteract)
+        {
+            switch(interactableObj.tag)
+            {
+                case "Lever":
+                interactableObj.GetComponent<Lever>().ActivateLever();
+                break;
+            }
+        }
+    }
+
     private void GroundCheck()
     {
         isGrounded = Physics2D.Raycast(this.transform.position, Vector2.down, raycastDistance, whatIsGround);
@@ -121,8 +140,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void PlayerAttack(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(hitBoxPoint.transform.position, attackRange, enemyLayer);
+            foreach(Collider2D enemy in enemiesInRange)
+            {
+                Debug.Log("Hit " + enemy.name);
+            }
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(this.transform.position, Vector2.down * raycastDistance);
+        if(hitBoxPoint != null)
+        {
+            Gizmos.DrawWireSphere(hitBoxPoint.transform.position, attackRange);
+        }
     }
 }
