@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class bullet2 : MonoBehaviour
 {
     GameObject target;
     public float speed;
     Rigidbody2D bulletRB;
 
-    void Start()
+    void start()
     {
         bulletRB = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player");
@@ -17,12 +16,4 @@ public class Bullet : MonoBehaviour
         bulletRB.velocity = new Vector2(moveDir.x, moveDir.y);
         Destroy(this.gameObject, 2);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-       Destroy(this.gameObject);   
-        
-    }
-
 }
