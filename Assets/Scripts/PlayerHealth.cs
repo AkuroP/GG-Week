@@ -92,6 +92,7 @@ public class PlayerHealth : MonoBehaviour
         Player.instance.rb.bodyType = RigidbodyType2D.Static;
         Player.instance.circleCollider.enabled = false;
         Player.instance.tag = "Untagged";
+        GameOverManager.instance.OnPlayerDeath();
         
 
     }
