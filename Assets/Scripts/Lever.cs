@@ -20,7 +20,6 @@ public class Lever : MonoBehaviour
     {
         if(collider.tag == "Player")
         {
-            collider.GetComponent<Player>().canInteract = true;
             collider.GetComponent<Player>().interactableObj = this.gameObject;
         }
     }
@@ -29,7 +28,6 @@ public class Lever : MonoBehaviour
     {
         if(collider.tag == "Player")
         {
-            collider.GetComponent<Player>().canInteract = false;
             collider.GetComponent<Player>().interactableObj = null;
         }
     }

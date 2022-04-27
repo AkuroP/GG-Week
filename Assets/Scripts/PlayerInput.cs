@@ -19,7 +19,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             ""id"": ""0ae2f492-7e25-4925-9ed1-ff3a2edf6121"",
             ""actions"": [
                 {
-                    ""name"": ""SwitchDimension"",
+                    ""name"": ""STAB"",
                     ""type"": ""Button"",
                     ""id"": ""2249786b-866c-4532-8cf4-6c98e0705261"",
                     ""expectedControlType"": ""Button"",
@@ -43,14 +43,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""b8be5835-28f9-4847-9aff-0c1ddf0f3806"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""3f97c8f9-f3c3-40f3-97dc-42336045c526"",
@@ -67,7 +59,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""SwitchDimension"",
+                    ""action"": ""STAB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -128,19 +120,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4b547a08-d8a2-42b9-a695-9ff1ccf43339"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""71f343e9-e587-4b95-85b5-6a5aa736194b"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -167,10 +148,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_SwitchDimension = m_Player.FindAction("SwitchDimension", throwIfNotFound: true);
+        m_Player_STAB = m_Player.FindAction("STAB", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
     }
 
@@ -221,19 +201,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_SwitchDimension;
+    private readonly InputAction m_Player_STAB;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SwitchDimension => m_Wrapper.m_Player_SwitchDimension;
+        public InputAction @STAB => m_Wrapper.m_Player_STAB;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -244,18 +222,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @SwitchDimension.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchDimension;
-                @SwitchDimension.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchDimension;
-                @SwitchDimension.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchDimension;
+                @STAB.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSTAB;
+                @STAB.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSTAB;
+                @STAB.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSTAB;
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
@@ -263,18 +238,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @SwitchDimension.started += instance.OnSwitchDimension;
-                @SwitchDimension.performed += instance.OnSwitchDimension;
-                @SwitchDimension.canceled += instance.OnSwitchDimension;
+                @STAB.started += instance.OnSTAB;
+                @STAB.performed += instance.OnSTAB;
+                @STAB.canceled += instance.OnSTAB;
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -293,10 +265,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnSwitchDimension(InputAction.CallbackContext context);
+        void OnSTAB(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
     }
 }
