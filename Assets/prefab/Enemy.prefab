@@ -184,6 +184,9 @@ MonoBehaviour:
   bullet: {fileID: 6811145874537895222, guid: 2387368744eec7743bd105259d37712d, type: 3}
   bulletParent: {fileID: 8547778566135581073}
   bulletParent2: {fileID: 8547778565217713318}
+  damageOnCollision: 20
+  enemyLife: 2
+  healWhenDead: 1
 --- !u!1 &8547778566135581073
 GameObject:
   m_ObjectHideFlags: 0

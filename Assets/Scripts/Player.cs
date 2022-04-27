@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     public GameObject interactableObj;
     
     [Header("Attack")]
+    public int attackDamage;
     public Transform hitBoxPointLeft;
     public Transform hitBoxPointRight;
     private Transform hitBoxPoint = null;
@@ -133,7 +134,7 @@ public class Player : MonoBehaviour
             Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(hitBoxPoint.transform.position, attackRange, enemyLayer);
             foreach(Collider2D enemy in enemiesInRange)
             {
-                Debug.Log("Hit " + enemy.name);
+                enemy.GetComponent<Enemy>().Hit(attackDamage);
             }
             if(interactableObj != null)
             {

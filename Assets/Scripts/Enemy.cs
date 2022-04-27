@@ -16,6 +16,10 @@ public class Enemy : MonoBehaviour
     private Transform player;
 
     public int damageOnCollision = 20;
+
+    public int enemyLife;
+    public int healWhenDead;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -61,5 +65,20 @@ public class Enemy : MonoBehaviour
             PlayerHealth playerHealth = collision.transform.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(damageOnCollision);
         }
+    }
+
+public void Hit(int damage)
+    {
+        enemyLife -= damage;
+        if(enemyLife <= 0)
+        {
+            Dead();
+        }
+    }
+
+    private void Dead()
+    {
+        Destroy(this.gameObject);
+        player.GetComponent<PlayerHealth>().currentHealth += healWhenDead;
     }
 }
