@@ -184,8 +184,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  circleCollider: {fileID: 0}
-  animator: {fileID: 0}
+  circleCollider: {fileID: 5158233992315892997}
+  animator: {fileID: 6659414859715234425}
 --- !u!58 &5158233992315892997
 CircleCollider2D:
   m_ObjectHideFlags: 0
