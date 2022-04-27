@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 6364755350595713289}
   - component: {fileID: 1200836570860521522}
   - component: {fileID: 5685785319088243003}
+  - component: {fileID: 6659414859715234425}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7245605c153e1894a88c2ca473662d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   playerSpeed: 5
   playerJumpForce: 5
   maxJumpCount: 1
@@ -182,6 +184,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  circleCollider: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!58 &5158233992315892997
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -331,4 +335,23 @@ MonoBehaviour:
   graphics: {fileID: 3359694415079531735}
   healthBar: {fileID: 0}
   invincibilityTime: 0.15
-  invincibilityTimeAfterHit: 5
+  invincibilityTimeAfterHit: 3
+--- !u!95 &6659414859715234425
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3008370265424313912}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ec8402f23af89e24bac9e440b301fbb7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

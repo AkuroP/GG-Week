@@ -28,28 +28,31 @@ public class Enemy : MonoBehaviour
     
     void Update()
     {
-        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
-        if (distanceFromPlayer < lineOfSite && distanceFromPlayer>shootingRange)
-        {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);            
-        }
-        else if (distanceFromPlayer <= shootingRange && nextFireTime<Time.time)
-        {   
-            if(player.position.x < this.transform.position.x)
-            {
-                
-                Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
-                EnemySprite.flipX = false;
+        if (player != null) { 
 
+                float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+                if (distanceFromPlayer < lineOfSite && distanceFromPlayer>shootingRange)
+                {
+                    transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);            
+                }
+                else if (distanceFromPlayer <= shootingRange && nextFireTime<Time.time)
+                {   
+                    if(player.position.x < this.transform.position.x)
+                    {
+                
+                        Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
+                        EnemySprite.flipX = false;
+
+                    }
+                    else
+                    {
+                        Instantiate(bullet, bulletParent2.transform.position, Quaternion.identity);
+                        EnemySprite.flipX = true;
+                    }
+                        nextFireTime = Time.time + shootingRate;
+                }
             }
-            else
-            {
-                Instantiate(bullet, bulletParent2.transform.position, Quaternion.identity);
-                EnemySprite.flipX = true;
-            }
-                nextFireTime = Time.time + shootingRate;
         }
-    }
 
     private void OnDrawGizmosSelected()
     {

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.Utilities;
 public class Player : MonoBehaviour
 {
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     [Header("Player Move")]
     public float playerSpeed;
     public float playerJumpForce;
@@ -41,12 +41,32 @@ public class Player : MonoBehaviour
     private Transform hitBoxPoint = null;
     public float attackRange;
     public LayerMask enemyLayer;
-    // Start is called before the first frame update
+
+    public CircleCollider2D circleCollider;
+
     
+
+
+
+    public Animator animator;
+    // Start is called before the first frame update
+
+     public static Player instance;
+
     private void Awake()
     {
-        lifeOrDeath = true;
+        if(instance != null)
+        {
+            Debug.LogWarning("Il y a plus de playerMovement dans la scene heal");
+            lifeOrDeath = true;
+
+            return;
+        }
+
+        instance = this;
     }
+    
+    
 
     private void Start()
     {

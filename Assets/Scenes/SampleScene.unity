@@ -1711,6 +1711,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3359694415079531735, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3873060224454608629, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1755,24 +1759,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1985474215}
     - target: {fileID: 5685785319088243003, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1985474215}
     - target: {fileID: 8009509401974633762, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 4067717983376385940}
+    - target: {fileID: 8009509401974633762, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
       propertyPath: lifeDimension
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8009509401974633762, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
+      propertyPath: circleCollider
+      value: 
+      objectReference: {fileID: 4067717983376385944}
     - target: {fileID: 8009509401974633762, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
       propertyPath: deathDimension
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
+--- !u!95 &4067717983376385940 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6659414859715234425, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
+  m_PrefabInstance: {fileID: 4067717983376385938}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &4067717983376385944 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5158233992315892997, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
+  m_PrefabInstance: {fileID: 4067717983376385938}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8547778566318505533
 PrefabInstance:
   m_ObjectHideFlags: 0

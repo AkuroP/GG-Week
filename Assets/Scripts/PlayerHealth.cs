@@ -19,6 +19,9 @@ public class PlayerHealth : MonoBehaviour
 
     public static PlayerHealth instance;
 
+    private Enemy enemy;
+    
+
     private void Awake()
     {
         if(instance != null)
@@ -65,12 +68,38 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth -= damage;
             healthBar.SetHealth(currentHealth);
+
+            if(currentHealth <= 0)
+            {
+                Die();
+                return;
+            }
+
+
+
             isInvincible = true;
             StartCoroutine(InvincibilityFlash());
             StartCoroutine(HandleInvincibilityDelay());
         }
     }
 
+    public void Die()
+    {
+        Debug.Log("Le joueur est mort");
+        Player.instance.enabled = false;
+        Player.instance.animator.SetTrigger("Death");
+        Player.instance.rb.bodyType = RigidbodyType2D.Static;
+        Player.instance.circleCollider.enabled = false;
+        Player.instance.tag = "Untagged";
+        
+
+    }
+
+    public void Destruction()
+    {
+        Destroy(Player.instance.gameObject);
+    }
+        
     public IEnumerator InvincibilityFlash()
     {
         while (isInvincible)
