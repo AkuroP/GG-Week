@@ -36,7 +36,9 @@ public class Player : MonoBehaviour
     public bool canInteract;
     
     [Header("Attack")]
-    public GameObject hitBoxPoint;
+    public Transform hitBoxPointLeft;
+    public Transform hitBoxPointRight;
+    private Transform hitBoxPoint = null;
     public float attackRange;
     public LayerMask enemyLayer;
     // Start is called before the first frame update
@@ -50,7 +52,7 @@ public class Player : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         jumpCount = maxJumpCount;
-        
+        hitBoxPoint = hitBoxPointRight;
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -58,11 +60,6 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(horizontalMove * playerSpeed, rb.velocity.y);
         GroundCheck();
         
-    }
-
-    private void OnDestroy()
-    {
-
     }
 
     //interverti entre le monde des vivant et le monde des morts
@@ -94,10 +91,12 @@ public class Player : MonoBehaviour
             if(horizontalMove < 0)
             {
                 this.GetComponent<SpriteRenderer>().flipX = true;
+                hitBoxPoint = hitBoxPointLeft; 
             }
             else
             {
                 this.GetComponent<SpriteRenderer>().flipX = false;
+                hitBoxPoint = hitBoxPointRight; 
             }
         }
     }
@@ -156,6 +155,9 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(this.transform.position, Vector2.down * raycastDistance);
-        Gizmos.DrawWireSphere(hitBoxPoint.transform.position, attackRange);
+        if(hitBoxPoint != null)
+        {
+            Gizmos.DrawWireSphere(hitBoxPoint.transform.position, attackRange);
+        }
     }
 }
