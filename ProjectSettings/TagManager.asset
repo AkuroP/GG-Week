@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MovementPlatform
   - Lever
+  - GhostPlatform
   layers:
   - Default
   - TransparentFX
