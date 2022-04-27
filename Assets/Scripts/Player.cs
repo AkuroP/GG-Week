@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     public GameObject lifeDimension;
     public GameObject deathDimension;
     [SerializeField]
-    public bool lifeOrDeath;
+    public bool lifeOrDeath = true;
 
     [Header("Interaction")]
     public GameObject interactableObj;
@@ -87,16 +87,59 @@ public class Player : MonoBehaviour
     {
         if(context.performed && isGrounded)
         {
+            GameObject[] ghostPlatform = GameObject.FindGameObjectsWithTag("GhostPlatform");
+            
+            foreach(GameObject ghostGO in ghostPlatform)
+            {
+                GhostPlatform ghostPlat = ghostGO.GetComponent<GhostPlatform>();
+                
+                if(this.lifeOrDeath)
+                {
+                    if(ghostPlat.LifeOrDeathGhost)
+                    {
+                        ghostGO.GetComponent<GhostPlatform>().enabled = false;
+                        ghostGO.GetComponent<SpriteRenderer>().color = ghostGO.GetComponent<GhostPlatform>().deathDimColor;
+                        ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = false;
+                        
+                    }
+                    else
+                    {
+                        ghostGO.GetComponent<GhostPlatform>().enabled = true;
+                        ghostGO.GetComponent<SpriteRenderer>().color = ghostGO.GetComponent<GhostPlatform>().deathDimColor;
+                        ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = true;
+                        
+                    }
+                    lifeDimension.SetActive(false);
+                    deathDimension.SetActive(true);
+                    
+                }
+                else
+                {
+                    if(ghostPlat.LifeOrDeathGhost)
+                    {
+                        ghostGO.GetComponent<GhostPlatform>().enabled = true;
+                        ghostGO.GetComponent<SpriteRenderer>().color = ghostGO.GetComponent<GhostPlatform>().lifeDimColor;
+                        ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = true;
+                        
+                    }
+                    else
+                    {
+                        ghostGO.GetComponent<GhostPlatform>().enabled = false;
+                        ghostGO.GetComponent<SpriteRenderer>().color = ghostGO.GetComponent<GhostPlatform>().lifeDimColor;
+                        ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = false;
+                    }
+                    lifeDimension.SetActive(true);
+                    deathDimension.SetActive(false);
+                    
+                    
+                }
+            }
             if(this.lifeOrDeath)
             {
-                lifeDimension.SetActive(false);
-                deathDimension.SetActive(true);
                 lifeOrDeath = false;
             }
             else
             {
-                lifeDimension.SetActive(true);
-                deathDimension.SetActive(false);
                 lifeOrDeath = true;
             }
         }
