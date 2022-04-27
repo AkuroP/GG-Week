@@ -24,14 +24,21 @@ public class Player : MonoBehaviour
     public float raycastDistance;
     public LayerMask whatIsGround;
 
-    [Header("Dimension Switch")]
     [Header("True = Life; False = Death")]
+    [Header("Dimension Switch")]
     public GameObject lifeDimension;
     public GameObject deathDimension;
     [SerializeField]
     public bool lifeOrDeath;
 
-
+    [Header("Interaction")]
+    public GameObject interactableObj;
+    public bool canInteract;
+    
+    [Header("Attack")]
+    public GameObject hitBoxPoint;
+    public float attackRange;
+    public LayerMask enemyLayer;
     // Start is called before the first frame update
     
     private void Awake()
@@ -112,6 +119,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if(context.performed && canInteract)
+        {
+            switch(interactableObj.tag)
+            {
+                case "Lever":
+                interactableObj.GetComponent<Lever>().ActivateLever();
+                break;
+            }
+        }
+    }
+
     private void GroundCheck()
     {
         isGrounded = Physics2D.Raycast(this.transform.position, Vector2.down, raycastDistance, whatIsGround);
@@ -121,8 +141,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void PlayerAttack(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(hitBoxPoint.transform.position, attackRange, enemyLayer);
+            foreach(Collider2D enemy in enemiesInRange)
+            {
+                Debug.Log("Hit " + enemy.name);
+            }
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(this.transform.position, Vector2.down * raycastDistance);
+        Gizmos.DrawWireSphere(hitBoxPoint.transform.position, attackRange);
     }
 }
