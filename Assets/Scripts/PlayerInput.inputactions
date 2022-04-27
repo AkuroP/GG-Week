@@ -6,7 +6,7 @@
             "id": "0ae2f492-7e25-4925-9ed1-ff3a2edf6121",
             "actions": [
                 {
-                    "name": "SwitchDimension",
+                    "name": "STAB",
                     "type": "Button",
                     "id": "2249786b-866c-4532-8cf4-6c98e0705261",
                     "expectedControlType": "Button",
@@ -30,14 +30,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "b8be5835-28f9-4847-9aff-0c1ddf0f3806",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "3f97c8f9-f3c3-40f3-97dc-42336045c526",
@@ -54,7 +46,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "SwitchDimension",
+                    "action": "STAB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -115,19 +107,8 @@
                 },
                 {
                     "name": "",
-                    "id": "4b547a08-d8a2-42b9-a695-9ff1ccf43339",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "71f343e9-e587-4b95-85b5-6a5aa736194b",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",

@@ -483,6 +483,7 @@ Transform:
   - {fileID: 537087963}
   - {fileID: 722753111}
   - {fileID: 842265355}
+  - {fileID: 2029637857}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10454,7 +10455,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 973434744}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: SwitchDimension
+        m_MethodName: STAB
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10502,22 +10503,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 973434744}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: b8be5835-28f9-4847-9aff-0c1ddf0f3806
-    m_ActionName: Player/Interact[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 973434744}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: PlayerAttack
         m_Mode: 0
         m_Arguments:
@@ -10561,7 +10546,6 @@ MonoBehaviour:
   deathDimension: {fileID: 518776564}
   lifeOrDeath: 0
   interactableObj: {fileID: 0}
-  canInteract: 0
   hitBoxPointLeft: {fileID: 479935921}
   hitBoxPointRight: {fileID: 645123602}
   attackRange: 0.5
@@ -16338,10 +16322,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029637854}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 518776565}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

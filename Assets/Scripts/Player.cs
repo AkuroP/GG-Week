@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
 
     [Header("Interaction")]
     public GameObject interactableObj;
-    public bool canInteract;
     
     [Header("Attack")]
     public Transform hitBoxPointLeft;
@@ -63,9 +62,9 @@ public class Player : MonoBehaviour
     }
 
     //interverti entre le monde des vivant et le monde des morts
-    public void SwitchDimension(InputAction.CallbackContext context)
+    public void STAB(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.performed && isGrounded)
         {
             if(this.lifeOrDeath)
             {
@@ -118,19 +117,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Interact(InputAction.CallbackContext context)
-    {
-        if(context.performed && canInteract)
-        {
-            switch(interactableObj.tag)
-            {
-                case "Lever":
-                interactableObj.GetComponent<Lever>().ActivateLever();
-                break;
-            }
-        }
-    }
-
     private void GroundCheck()
     {
         isGrounded = Physics2D.Raycast(this.transform.position, Vector2.down, raycastDistance, whatIsGround);
@@ -148,6 +134,15 @@ public class Player : MonoBehaviour
             foreach(Collider2D enemy in enemiesInRange)
             {
                 Debug.Log("Hit " + enemy.name);
+            }
+            if(interactableObj != null)
+            {
+                switch(interactableObj.tag)
+                {
+                    case "Lever":
+                    interactableObj.GetComponent<Lever>().ActivateLever();
+                    break;
+                }
             }
         }
     }
