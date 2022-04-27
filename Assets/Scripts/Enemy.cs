@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     public int damageOnCollision = 20;
 
     public int enemyLife;
-    public int healWhenDead;
+    public int healthPoint;
 
     void Start()
     {
@@ -79,6 +79,6 @@ public void Hit(int damage)
     private void Dead()
     {
         Destroy(this.gameObject);
-        player.GetComponent<PlayerHealth>().currentHealth += healWhenDead;
+        PlayerHealth.instance.HealPlayer(healthPoint);
     }
 }

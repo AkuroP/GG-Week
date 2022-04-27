@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
 
     public HealthBar healthBar;
 
-    public float invincibilityTime = 015f;
+    public float invincibilityTime = 0.15f;
     public float invincibilityTimeAfterHit = 2f;
 
     public static PlayerHealth instance;
