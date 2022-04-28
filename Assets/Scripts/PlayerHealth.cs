@@ -10,12 +10,17 @@ public class PlayerHealth : MonoBehaviour
 
     public bool isInvincible = false;
 
+    public bool isDamaged = false;
+
     public SpriteRenderer graphics;
 
     public HealthBar healthBar;
 
     public float invincibilityTime = 0.15f;
     public float invincibilityTimeAfterHit = 2f;
+
+    public float DamageTime = 0.15f;
+    public float DamageTimeAfterHit = 2f;
 
     public static PlayerHealth instance;
 
@@ -84,6 +89,27 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public IEnumerator TakeDamageInDeathWorld(int damage)
+    {
+       
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        if (currentHealth <= 0)
+        {
+            Die();           
+        }
+        isDamaged = true;
+        StartCoroutine(DamageFlash());
+        StartCoroutine(HandleDamageDelay());
+        yield return new WaitForSeconds(1f);
+
+
+        if (Player.instance.lifeOrDeath == false)
+        {
+            StartCoroutine(TakeDamageInDeathWorld(damage));
+        }
+    }
+
     public void Die()
     {
         Debug.Log("Le joueur est mort");
@@ -92,6 +118,7 @@ public class PlayerHealth : MonoBehaviour
         Player.instance.rb.bodyType = RigidbodyType2D.Static;
         Player.instance.circleCollider.enabled = false;
         Player.instance.tag = "Untagged";
+        GameOverManager.instance.OnPlayerDeath();
         
 
     }
@@ -100,7 +127,18 @@ public class PlayerHealth : MonoBehaviour
     {
         Destroy(Player.instance.gameObject);
     }
-        
+
+    public IEnumerator DamageFlash()
+    {
+        while (isDamaged)
+        {
+            graphics.color = new Color(0.6f, 0f, 0f, 1f);
+            yield return new WaitForSeconds(DamageTime);
+            graphics.color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(DamageTime);
+        }
+    }
+
     public IEnumerator InvincibilityFlash()
     {
         while (isInvincible)
@@ -116,5 +154,11 @@ public class PlayerHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(invincibilityTimeAfterHit);
         isInvincible = false;
+    }
+
+    public IEnumerator HandleDamageDelay()
+    {
+        yield return new WaitForSeconds(DamageTimeAfterHit);
+        isDamaged = false;
     }
 }

@@ -462,8 +462,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1186599401}
     - target: {fileID: 5685785319088243003, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
-      propertyPath: invincibilityTimeAfterHit
-      value: 3
+      propertyPath: DamageTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8009509401974633762, guid: c7eedbf2af78542458fdb7289c68d68e, type: 3}
       propertyPath: lifeOrDeath

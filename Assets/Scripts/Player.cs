@@ -137,6 +137,7 @@ public class Player : MonoBehaviour
             if(this.lifeOrDeath)
             {
                 lifeOrDeath = false;
+                PlayerHealth.instance.StartCoroutine(PlayerHealth.instance.TakeDamageInDeathWorld(1));
             }
             else
             {
