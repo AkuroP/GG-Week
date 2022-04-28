@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 5685785319088243003}
   - component: {fileID: 6659414859715234425}
   - component: {fileID: 2459246462017319835}
-  - component: {fileID: 5287825981322613386}
+  - component: {fileID: 1164974162088423461}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -139,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d4ec45f17c8dba4ba4b89ec3dcdce07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   attackDamage: 1
   hitBoxPointLeft: {fileID: 6034576328977474269}
   hitBoxPointRight: {fileID: 150519558617683959}
-  attackRange: 0.5
+  attackRange: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -190,6 +190,7 @@ MonoBehaviour:
   - {fileID: 230457198348963285, guid: f312b7aad8282ac448bdcd7f41075894, type: 3}
   - {fileID: 5129219016134761084, guid: 30998111a199302429ac596fdb5601b5, type: 3}
   animator: {fileID: 6659414859715234425}
+  canAttack: 1
 --- !u!114 &1200836570860521522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,8 +342,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &5287825981322613386
-SphereCollider:
+--- !u!65 &1164974162088423461
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -352,5 +353,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 2.51, y: 4.69, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}

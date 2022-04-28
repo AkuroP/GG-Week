@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
 
      public static Player instance;
 
+    public bool canAttack;
     private void Awake()
     {
         if(instance != null)
@@ -75,11 +76,15 @@ public class Player : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
         jumpCount = maxJumpCount;
         hitBoxPoint = hitBoxPointRight;
+        lifeDimension = GameObject.FindWithTag("LifeDimension");
+        deathDimension = GameObject.FindWithTag("DeathDimension");
+        deathDimension.SetActive(false);
     }
     // Update is called once per frame
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontalMove * playerSpeed, rb.velocity.y);
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         GroundCheck();
         
     }
@@ -87,26 +92,34 @@ public class Player : MonoBehaviour
     //interverti entre le monde des vivant et le monde des morts
     public void STAB(InputAction.CallbackContext context)
     {
-        if(context.performed && isGrounded)
+        if(context.performed /*&& isGrounded*/)
         {
-            int random = Random.Range(0, stabClips.Count);
-                Instantiate(stabClips[random]);
-                if(this.GetComponent<SpriteRenderer>().flipX)
+            if(canAttack)
+            {
+                int random = Random.Range(0, stabClips.Count);
+                if(lifeOrDeath)
                 {
-                    Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, -90f, 0f));
+                    Instantiate(stabClips[random]);
+                    if(this.GetComponent<SpriteRenderer>().flipX)
+                    {
+                        Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, -90f, 0f));
+                    }
+                    else
+                    {
+                        Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, 90f, 0f));
+                    }
+                    SwitchDimension();
                 }
-                else
-                {
-                    Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, 90f, 0f));
-                }
-            SwitchDimension();
+            }
         }
     }
 
     public void SwitchDimension()
     {
         GameObject[] ghostPlatform = GameObject.FindGameObjectsWithTag("GhostPlatform");
-            
+        
+        if(ghostPlatform != null)
+        {
             foreach(GameObject ghostGO in ghostPlatform)
             {
                 GhostPlatform ghostPlat = ghostGO.GetComponent<GhostPlatform>();
@@ -126,8 +139,6 @@ public class Player : MonoBehaviour
                         ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = true;
                         
                     }
-                    lifeDimension.SetActive(false);
-                    deathDimension.SetActive(true);
                     
                 }
                 else
@@ -145,21 +156,24 @@ public class Player : MonoBehaviour
                         ghostGO.GetComponent<MeshRenderer>().material.color = ghostGO.GetComponent<GhostPlatform>().lifeDimColor;
                         ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = false;
                     }
-                    lifeDimension.SetActive(true);
-                    deathDimension.SetActive(false);
                     
                     
                 }
             }
-            if(this.lifeOrDeath)
-            {
-                lifeOrDeath = false;
-                PlayerHealth.instance.StartCoroutine(PlayerHealth.instance.TakeDamageInDeathWorld(1));
-            }
-            else
-            {
-                lifeOrDeath = true;
-            }
+        }
+        if(this.lifeOrDeath)
+        {
+            lifeOrDeath = false;
+            lifeDimension.SetActive(false);
+            deathDimension.SetActive(true);
+            PlayerHealth.instance.StartCoroutine(PlayerHealth.instance.TakeDamageInDeathWorld(1));
+        }
+        else
+        {
+            lifeOrDeath = true;
+            lifeDimension.SetActive(true);
+            deathDimension.SetActive(false);
+        }
     }
 
     //mouvement du joueur
@@ -186,6 +200,7 @@ public class Player : MonoBehaviour
     {
         if(context.performed && jumpCount > 0)
         {
+            animator.SetTrigger("Jump");
             rb.velocity = new Vector2(rb.velocity.x, playerJumpForce);
             jumpCount--;
             hasJumped = true;
@@ -200,7 +215,9 @@ public class Player : MonoBehaviour
 
     private void GroundCheck()
     {
-        isGrounded = Physics.Raycast(this.transform.position, Vector2.down, raycastDistance, whatIsGround);
+        RaycastHit yes;
+        isGrounded = Physics.Raycast(this.transform.position, Vector3.down, out yes, raycastDistance, whatIsGround);
+        
         if(isGrounded && !hasJumped)
         {
             jumpCount = maxJumpCount;
@@ -213,24 +230,27 @@ public class Player : MonoBehaviour
         {
             if(lifeOrDeath)
             {
-                Collider[] enemiesInRange = new Collider[10];
-                int numbEnemies = Physics.OverlapSphereNonAlloc(hitBoxPoint.transform.position, attackRange, enemiesInRange, enemyLayer);
-                if(numbEnemies > 0)
+                if(canAttack)
                 {
-                    foreach(Collider enemy in enemiesInRange)
+                    Collider[] enemiesInRange = new Collider[10];
+                    int numbEnemies = Physics.OverlapSphereNonAlloc(hitBoxPoint.transform.position, attackRange, enemiesInRange, enemyLayer);
+                    if(numbEnemies > 0)
                     {
-                        if(enemy != null)
+                        foreach(Collider enemy in enemiesInRange)
                         {
-                            enemy.GetComponent<Enemy>().Hit(attackDamage);
+                            if(enemy != null)
+                            {
+                                enemy.GetComponent<Enemy>().Hit(attackDamage);
+                            }
                         }
-                    }
-                    if(interactableObj != null)
-                    {
-                        switch(interactableObj.tag)
+                        if(interactableObj != null)
                         {
-                            case "Lever":
-                            interactableObj.GetComponent<Lever>().ActivateLever();
-                            break;
+                            switch(interactableObj.tag)
+                            {
+                                case "Lever":
+                                interactableObj.GetComponent<Lever>().ActivateLever();
+                                break;
+                            }
                         }
                     }
                 }
@@ -245,10 +265,7 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(this.transform.position, Vector2.down * raycastDistance);
-        if(hitBoxPoint != null)
-        {
-            Gizmos.DrawWireSphere(hitBoxPoint.transform.position, attackRange);
-        }
+        Gizmos.DrawRay(this.transform.position, Vector3.down * raycastDistance);
+        Gizmos.DrawWireSphere(hitBoxPointRight.transform.position, attackRange);
     }
 }

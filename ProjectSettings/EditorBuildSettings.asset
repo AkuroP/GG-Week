@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Level/Jungle.unity
+    guid: a5d44f44088895d44bcd9bf9b2507bb5
+  - enabled: 1
+    path: Assets/Scenes/Level/Temple.unity
+    guid: f42a0f8f3e520bc4bb64166ba2bbcbb5
   m_configObjects: {}
