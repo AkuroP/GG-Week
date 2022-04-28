@@ -211,26 +211,34 @@ public class Player : MonoBehaviour
     {
         if(context.performed)
         {
-            Collider[] enemiesInRange = new Collider[10];
-            int numbEnemies = Physics.OverlapSphereNonAlloc(hitBoxPoint.transform.position, attackRange, enemiesInRange, enemyLayer);
-            if(numbEnemies > 0)
+            if(lifeOrDeath)
             {
-                foreach(Collider enemy in enemiesInRange)
+                Collider[] enemiesInRange = new Collider[10];
+                int numbEnemies = Physics.OverlapSphereNonAlloc(hitBoxPoint.transform.position, attackRange, enemiesInRange, enemyLayer);
+                if(numbEnemies > 0)
                 {
-                    if(enemy != null)
+                    foreach(Collider enemy in enemiesInRange)
                     {
-                        enemy.GetComponent<Enemy>().Hit(attackDamage);
+                        if(enemy != null)
+                        {
+                            enemy.GetComponent<Enemy>().Hit(attackDamage);
+                        }
+                    }
+                    if(interactableObj != null)
+                    {
+                        switch(interactableObj.tag)
+                        {
+                            case "Lever":
+                            interactableObj.GetComponent<Lever>().ActivateLever();
+                            break;
+                        }
                     }
                 }
-                if(interactableObj != null)
-                {
-                    switch(interactableObj.tag)
-                    {
-                        case "Lever":
-                        interactableObj.GetComponent<Lever>().ActivateLever();
-                        break;
-                    }
-                }
+
+            }
+            else
+            {
+                SwitchDimension();
             }
         }
     }

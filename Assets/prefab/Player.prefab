@@ -304,7 +304,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   invincibilityTime: 0.15
   invincibilityTimeAfterHit: 3
-  DamageTime: 1
+  DamageTime: 0.5
   DamageTimeAfterHit: 2
 --- !u!95 &6659414859715234425
 Animator:
