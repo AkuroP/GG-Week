@@ -332,10 +332,13 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   isInvincible: 0
+  isDamaged: 0
   graphics: {fileID: 3359694415079531735}
   healthBar: {fileID: 0}
   invincibilityTime: 0.15
   invincibilityTimeAfterHit: 3
+  DamageTime: 1
+  DamageTimeAfterHit: 2
 --- !u!95 &6659414859715234425
 Animator:
   serializedVersion: 3
