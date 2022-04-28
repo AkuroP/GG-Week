@@ -7,14 +7,14 @@ public class GhostPlatform : MonoBehaviour
     public Color lifeDimColor;
     public Color deathDimColor;
     public bool LifeOrDeathGhost;
-    private SpriteRenderer platformSR;
-    public Collider2D platformCollider;
+    public Collider platformCollider;
+    public Material platformMat;
     private Player player;
     // Start is called before the first frame update
     void Start()
     {
-        platformSR = this.GetComponent<SpriteRenderer>();
-        platformCollider = this.GetComponent<Collider2D>();
+        platformMat = this.GetComponent<MeshRenderer>().material;
+        platformCollider = this.GetComponent<Collider>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
