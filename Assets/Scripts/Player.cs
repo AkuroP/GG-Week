@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     public float attackRange;
     public LayerMask enemyLayer;
 
-    public CircleCollider2D circleCollider;
+    //public CircleCollider2D circleCollider;
 
     
     [Header("Stab")]
@@ -211,18 +211,25 @@ public class Player : MonoBehaviour
     {
         if(context.performed)
         {
-            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(hitBoxPoint.transform.position, attackRange, enemyLayer);
-            foreach(Collider2D enemy in enemiesInRange)
+            Collider[] enemiesInRange = new Collider[10];
+            int numbEnemies = Physics.OverlapSphereNonAlloc(hitBoxPoint.transform.position, attackRange, enemiesInRange, enemyLayer);
+            if(numbEnemies > 0)
             {
-                enemy.GetComponent<Enemy>().Hit(attackDamage);
-            }
-            if(interactableObj != null)
-            {
-                switch(interactableObj.tag)
+                foreach(Collider enemy in enemiesInRange)
                 {
-                    case "Lever":
-                    interactableObj.GetComponent<Lever>().ActivateLever();
-                    break;
+                    if(enemy != null)
+                    {
+                        enemy.GetComponent<Enemy>().Hit(attackDamage);
+                    }
+                }
+                if(interactableObj != null)
+                {
+                    switch(interactableObj.tag)
+                    {
+                        case "Lever":
+                        interactableObj.GetComponent<Lever>().ActivateLever();
+                        break;
+                    }
                 }
             }
         }

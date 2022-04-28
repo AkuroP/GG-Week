@@ -7,19 +7,19 @@ public class Bullet : MonoBehaviour
 {
     GameObject target;
     public float speed;
-    Rigidbody2D bulletRB;
+    Rigidbody bulletRB;
     public int damageOnCollision = 20;
 
     void Start()
     {
-        bulletRB = GetComponent<Rigidbody2D>();
+        bulletRB = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player");
         Vector2 moveDir = (target.transform.position - transform.position).normalized * speed;
         bulletRB.velocity = new Vector2(moveDir.x, moveDir.y);
         Destroy(this.gameObject, 2);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
         {

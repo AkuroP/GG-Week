@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if(isAShooter == false)
         {

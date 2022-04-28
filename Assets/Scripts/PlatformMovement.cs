@@ -72,7 +72,7 @@ public class PlatformMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
         {
@@ -83,7 +83,7 @@ public class PlatformMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
         {

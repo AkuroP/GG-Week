@@ -175,7 +175,7 @@ MonoBehaviour:
     m_Bits: 64
   lifeDimension: {fileID: 0}
   deathDimension: {fileID: 0}
-  lifeOrDeath: 0
+  lifeOrDeath: 1
   interactableObj: {fileID: 0}
   attackDamage: 1
   hitBoxPointLeft: {fileID: 6034576328977474269}
@@ -184,7 +184,6 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  circleCollider: {fileID: 0}
   stabParticle: {fileID: 3163892192728453549, guid: 569298104a9cfec47bb49d3707a77c5c, type: 3}
   stabClips:
   - {fileID: 553391215772415105, guid: 06a9268ebfdd18d44bbe053a61ee8b56, type: 3}
@@ -319,7 +318,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ec8402f23af89e24bac9e440b301fbb7, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 2
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
