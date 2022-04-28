@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class ppp : MonoBehaviour
 {
@@ -69,13 +70,11 @@ public class ppp : MonoBehaviour
         Application.Quit();
     }
 
-
-
-
     private void Action_started(InputAction.CallbackContext obj)
     {     
         Pause();
-        throw new System.NotImplementedException();       
+
+        //EventSystem.current.SetSelectedGameObject();
     }
 
 }
