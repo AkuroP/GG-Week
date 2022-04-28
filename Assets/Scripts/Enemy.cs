@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     public GameObject bulletParent2;
     private Transform player;
 
+    public bool isAShooter = false;
+
     public int damageOnCollision = 20;
 
     public int enemyLife;
@@ -63,10 +65,14 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if(isAShooter == false)
         {
-            PlayerHealth playerHealth = collision.transform.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(damageOnCollision);
+            if (collision.transform.CompareTag("Player"))
+            {
+                PlayerHealth playerHealth = collision.transform.GetComponent<PlayerHealth>();
+                playerHealth.TakeDamage(damageOnCollision);
+            }
+
         }
     }
 
