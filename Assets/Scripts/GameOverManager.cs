@@ -26,6 +26,13 @@ public class GameOverManager : MonoBehaviour
         gameOverUI.SetActive(true);
     }
 
+    public void Resume()
+    {
+        gameOverUI.SetActive(false);
+        Time.timeScale = 1f;
+        
+    }
+
     public void RetryButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

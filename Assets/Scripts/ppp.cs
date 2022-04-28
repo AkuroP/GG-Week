@@ -4,11 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.HID;
+using UnityEngine.UI;
 
 public class ppp : MonoBehaviour
 {
 
     public static bool isPaused = false;
+
+    public GameObject resumeButton;
+
+   
+
+    
 
     public GameObject PauseMenuUI;
     [SerializeField] InputActionReference _pause;
@@ -19,9 +27,17 @@ public class ppp : MonoBehaviour
         _inputBinding.Enable();
 
         _pause.action.started += Action_started;
-       
+
         _pause.asset.Enable();
 
+    }
+
+    private void Update()
+    {
+        if (PlayerHealth.instance.currentHealth <= 0)
+        {
+            resumeButton.SetActive(false);
+        }
     }
 
 
@@ -55,10 +71,21 @@ public class ppp : MonoBehaviour
 
     public void Resume()
     {
+            PauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+            
+    }
+    public void RetryButton()
+    {
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
+
+
     public void LoadMenu()
     {
         Time.timeScale = 1f;
@@ -69,12 +96,14 @@ public class ppp : MonoBehaviour
     {
         Application.Quit();
     }
-
+    
     private void Action_started(InputAction.CallbackContext obj)
-    {     
+    {
         Pause();
 
         //EventSystem.current.SetSelectedGameObject();
     }
 
+
+    
 }

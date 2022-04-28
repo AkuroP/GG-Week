@@ -8,11 +8,11 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject button;
 
-    public GameObject buttonSetting;
+    
 
     public GameObject mainMenu;
 
-    public GameObject settingsMenu;
+    
 
     public bool Menu = true;
     public void PlayGame()
@@ -31,10 +31,7 @@ public class MainMenu : MonoBehaviour
          EventSystem.current.firstSelectedGameObject = button;
 
         }
-        else 
-        {
-            EventSystem.current.firstSelectedGameObject = buttonSetting;
-        }
+        
         
     }
 
