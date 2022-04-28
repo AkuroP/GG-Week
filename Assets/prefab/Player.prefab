@@ -71,11 +71,11 @@ GameObject:
   - component: {fileID: 3873060224454608629}
   - component: {fileID: 3359694415079531735}
   - component: {fileID: 8009509401974633762}
-  - component: {fileID: 5158233992315892997}
-  - component: {fileID: 6364755350595713289}
   - component: {fileID: 1200836570860521522}
   - component: {fileID: 5685785319088243003}
   - component: {fileID: 6659414859715234425}
+  - component: {fileID: 2459246462017319835}
+  - component: {fileID: 5287825981322613386}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -184,50 +184,13 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  circleCollider: {fileID: 5158233992315892997}
+  circleCollider: {fileID: 0}
   stabParticle: {fileID: 3163892192728453549, guid: 569298104a9cfec47bb49d3707a77c5c, type: 3}
   stabClips:
   - {fileID: 553391215772415105, guid: 06a9268ebfdd18d44bbe053a61ee8b56, type: 3}
   - {fileID: 230457198348963285, guid: f312b7aad8282ac448bdcd7f41075894, type: 3}
   - {fileID: 5129219016134761084, guid: 30998111a199302429ac596fdb5601b5, type: 3}
   animator: {fileID: 6659414859715234425}
---- !u!58 &5158233992315892997
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3008370265424313912}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!50 &6364755350595713289
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3008370265424313912}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: a5fb682b684974b4d9fbdb67a513d8dc, type: 2}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!114 &1200836570860521522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,3 +326,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &2459246462017319835
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3008370265424313912}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!135 &5287825981322613386
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3008370265424313912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
