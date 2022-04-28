@@ -185,6 +185,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   circleCollider: {fileID: 5158233992315892997}
+  stabParticle: {fileID: 3163892192728453549, guid: 569298104a9cfec47bb49d3707a77c5c, type: 3}
+  stabClips:
+  - {fileID: 553391215772415105, guid: 06a9268ebfdd18d44bbe053a61ee8b56, type: 3}
+  - {fileID: 230457198348963285, guid: f312b7aad8282ac448bdcd7f41075894, type: 3}
+  - {fileID: 5129219016134761084, guid: 30998111a199302429ac596fdb5601b5, type: 3}
   animator: {fileID: 6659414859715234425}
 --- !u!58 &5158233992315892997
 CircleCollider2D:

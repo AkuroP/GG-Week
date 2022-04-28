@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.Utilities;
 public class Player : MonoBehaviour
 {
 
-    public Rigidbody2D rb;
+    public Rigidbody rb;
     [Header("Player Move")]
     public float playerSpeed;
     public float playerJumpForce;
@@ -45,7 +45,9 @@ public class Player : MonoBehaviour
     public CircleCollider2D circleCollider;
 
     
-
+    [Header("Stab")]
+    public GameObject stabParticle;
+    public List<GameObject> stabClips;
 
 
     public Animator animator;
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
+        rb = this.GetComponent<Rigidbody>();
         jumpCount = maxJumpCount;
         hitBoxPoint = hitBoxPointRight;
     }
@@ -87,25 +89,40 @@ public class Player : MonoBehaviour
     {
         if(context.performed && isGrounded)
         {
-            GameObject[] ghostPlatform = GameObject.FindGameObjectsWithTag("GhostPlatform");
+            int random = Random.Range(0, stabClips.Count);
+                Instantiate(stabClips[random]);
+                if(this.GetComponent<SpriteRenderer>().flipX)
+                {
+                    Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, -90f, 0f));
+                }
+                else
+                {
+                    Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, 90f, 0f));
+                }
+            SwitchDimension();
+        }
+    }
+
+    public void SwitchDimension()
+    {
+        GameObject[] ghostPlatform = GameObject.FindGameObjectsWithTag("GhostPlatform");
             
             foreach(GameObject ghostGO in ghostPlatform)
             {
                 GhostPlatform ghostPlat = ghostGO.GetComponent<GhostPlatform>();
-                
                 if(this.lifeOrDeath)
                 {
                     if(ghostPlat.LifeOrDeathGhost)
                     {
                         ghostGO.GetComponent<GhostPlatform>().enabled = false;
-                        ghostGO.GetComponent<SpriteRenderer>().color = ghostGO.GetComponent<GhostPlatform>().deathDimColor;
+                        ghostGO.GetComponent<MeshRenderer>().material.color = ghostGO.GetComponent<GhostPlatform>().deathDimColor;
                         ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = false;
                         
                     }
                     else
                     {
                         ghostGO.GetComponent<GhostPlatform>().enabled = true;
-                        ghostGO.GetComponent<SpriteRenderer>().color = ghostGO.GetComponent<GhostPlatform>().deathDimColor;
+                        ghostGO.GetComponent<MeshRenderer>().material.color = ghostGO.GetComponent<GhostPlatform>().deathDimColor;
                         ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = true;
                         
                     }
@@ -118,14 +135,14 @@ public class Player : MonoBehaviour
                     if(ghostPlat.LifeOrDeathGhost)
                     {
                         ghostGO.GetComponent<GhostPlatform>().enabled = true;
-                        ghostGO.GetComponent<SpriteRenderer>().color = ghostGO.GetComponent<GhostPlatform>().lifeDimColor;
+                        ghostGO.GetComponent<MeshRenderer>().material.color = ghostGO.GetComponent<GhostPlatform>().lifeDimColor;
                         ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = true;
                         
                     }
                     else
                     {
                         ghostGO.GetComponent<GhostPlatform>().enabled = false;
-                        ghostGO.GetComponent<SpriteRenderer>().color = ghostGO.GetComponent<GhostPlatform>().lifeDimColor;
+                        ghostGO.GetComponent<MeshRenderer>().material.color = ghostGO.GetComponent<GhostPlatform>().lifeDimColor;
                         ghostGO.GetComponent<GhostPlatform>().platformCollider.enabled = false;
                     }
                     lifeDimension.SetActive(true);
@@ -143,7 +160,6 @@ public class Player : MonoBehaviour
             {
                 lifeOrDeath = true;
             }
-        }
     }
 
     //mouvement du joueur
@@ -184,7 +200,7 @@ public class Player : MonoBehaviour
 
     private void GroundCheck()
     {
-        isGrounded = Physics2D.Raycast(this.transform.position, Vector2.down, raycastDistance, whatIsGround);
+        isGrounded = Physics.Raycast(this.transform.position, Vector2.down, raycastDistance, whatIsGround);
         if(isGrounded && !hasJumped)
         {
             jumpCount = maxJumpCount;

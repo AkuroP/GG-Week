@@ -115,7 +115,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Le joueur est mort");
         Player.instance.enabled = false;
         Player.instance.animator.SetTrigger("Death");
-        Player.instance.rb.bodyType = RigidbodyType2D.Static;
+        //Player.instance.rb.bodyType = RigidbodyType2D.Static;
         Player.instance.circleCollider.enabled = false;
         Player.instance.tag = "Untagged";
         GameOverManager.instance.OnPlayerDeath();
