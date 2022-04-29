@@ -6,7 +6,7 @@ public class Lever : MonoBehaviour
 {
     public GameObject platformToActivate;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter(Collider collider)
     {
         if(collider.tag == "Player")
         {
@@ -14,7 +14,7 @@ public class Lever : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    private void OnTriggerExit(Collider collider)
     {
         if(collider.tag == "Player")
         {

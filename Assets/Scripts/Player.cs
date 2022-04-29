@@ -182,15 +182,18 @@ public class Player : MonoBehaviour
         horizontalMove = context.ReadValue<Vector2>().x;
         if(context.performed)
         {
-            if(horizontalMove < 0)
+            if(Time.timeScale == 1)
             {
-                this.GetComponent<SpriteRenderer>().flipX = true;
-                hitBoxPoint = hitBoxPointLeft; 
-            }
-            else
-            {
-                this.GetComponent<SpriteRenderer>().flipX = false;
-                hitBoxPoint = hitBoxPointRight; 
+                if(horizontalMove < 0)
+                {
+                    this.GetComponent<SpriteRenderer>().flipX = true;
+                    hitBoxPoint = hitBoxPointLeft; 
+                }
+                else
+                {
+                    this.GetComponent<SpriteRenderer>().flipX = false;
+                    hitBoxPoint = hitBoxPointRight; 
+                }
             }
         }
     }
@@ -243,14 +246,14 @@ public class Player : MonoBehaviour
                                 enemy.GetComponent<Enemy>().Hit(attackDamage);
                             }
                         }
-                        if(interactableObj != null)
+                    }
+                    else if(interactableObj != null)
+                    {
+                        switch(interactableObj.tag)
                         {
-                            switch(interactableObj.tag)
-                            {
-                                case "Lever":
-                                interactableObj.GetComponent<Lever>().ActivateLever();
-                                break;
-                            }
+                            case "Lever":
+                            interactableObj.GetComponent<Lever>().ActivateLever();
+                            break;
                         }
                     }
                 }
@@ -258,7 +261,19 @@ public class Player : MonoBehaviour
             }
             else
             {
-                SwitchDimension();
+                if(interactableObj != null)
+                    {
+                        switch(interactableObj.tag)
+                        {
+                            case "Lever":
+                            interactableObj.GetComponent<Lever>().ActivateLever();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        SwitchDimension();
+                    }
             }
         }
     }
