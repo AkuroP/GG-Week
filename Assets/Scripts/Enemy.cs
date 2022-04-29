@@ -32,26 +32,34 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (player != null) { 
-                if(player.position.x < this.transform.position.x)
+                if(EnemySprite != null)
                 {
-                    EnemySprite.flipX = true;
-
-                }
-                else
-                {
-                    EnemySprite.flipX = false;
+                    if(player.position.x < this.transform.position.x)
+                    {
+                        EnemySprite.flipX = true;
+                    }
+                    else
+                    {
+                        EnemySprite.flipX = false;
+                    }
                 }
 
                 float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
                 if (distanceFromPlayer < lineOfSite && distanceFromPlayer>shootingRange)
                 {
                     transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);       
-                    enemyAnim.SetBool("Chase", true);     
+                    if(enemyAnim != null)
+                    {
+                        enemyAnim.SetBool("Chase", true);     
+                    }
                 }
                 else if (distanceFromPlayer <= shootingRange && nextFireTime<Time.time) 
                 {   
-                    enemyAnim.SetBool("Chase", false);     
-                    enemyAnim.SetTrigger("Attack");
+                    if(enemyAnim != null)
+                    {
+                        enemyAnim.SetBool("Chase", false);     
+                        enemyAnim.SetTrigger("Attack");
+                    }
                     if(isAShooter)
                     {
 
