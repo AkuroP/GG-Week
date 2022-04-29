@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealPowerUp : MonoBehaviour
 {
     public int healthPoint;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Player"))
         {
