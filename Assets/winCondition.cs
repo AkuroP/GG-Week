@@ -23,7 +23,6 @@ public class winCondition : MonoBehaviour
         if(collider.tag == "Player")
         {
             SceneManager.LoadScene("VictoryScreen");
-            Time.timeScale = 0f;
         }
     }
 
