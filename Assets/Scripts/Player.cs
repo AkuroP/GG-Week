@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     public GameObject stabParticle;
     public List<GameObject> stabClips;
 
+    public GameObject effetGlacial;
 
     public Animator animator;
     // Start is called before the first frame update
@@ -96,21 +97,26 @@ public class Player : MonoBehaviour
         {
             if(canAttack)
             {
-                int random = Random.Range(0, stabClips.Count);
                 if(lifeOrDeath)
                 {
-                    Instantiate(stabClips[random]);
-                    if(this.GetComponent<SpriteRenderer>().flipX)
-                    {
-                        Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, -90f, 0f));
-                    }
-                    else
-                    {
-                        Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, 90f, 0f));
-                    }
                     SwitchDimension();
+                    animator.SetTrigger("STAB");
                 }
             }
+        }
+    }
+
+    public void InstantiateStab()
+    {
+        int random = Random.Range(0, stabClips.Count);
+        Instantiate(stabClips[random]);
+        if(this.GetComponent<SpriteRenderer>().flipX)
+        {
+            Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, -90f, 0f));
+        }
+        else
+        {
+            Instantiate(stabParticle, this.transform.position, Quaternion.Euler(0f, 90f, 0f));
         }
     }
 
@@ -166,12 +172,14 @@ public class Player : MonoBehaviour
             lifeOrDeath = false;
             lifeDimension.SetActive(false);
             deathDimension.SetActive(true);
+            effetGlacial.SetActive(true);
             PlayerHealth.instance.StartCoroutine(PlayerHealth.instance.TakeDamageInDeathWorld(1));
         }
         else
         {
             lifeOrDeath = true;
             lifeDimension.SetActive(true);
+            effetGlacial.SetActive(false);
             deathDimension.SetActive(false);
         }
     }
