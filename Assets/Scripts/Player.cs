@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
 
      public static Player instance;
 
+     public GameObject heartbeat;
+
     public bool canAttack;
     private void Awake()
     {
@@ -173,6 +175,7 @@ public class Player : MonoBehaviour
             lifeDimension.SetActive(false);
             deathDimension.SetActive(true);
             effetGlacial.SetActive(true);
+            heartbeat.SetActive(true);
             PlayerHealth.instance.StartCoroutine(PlayerHealth.instance.TakeDamageInDeathWorld(1));
         }
         else
@@ -181,6 +184,7 @@ public class Player : MonoBehaviour
             lifeDimension.SetActive(true);
             effetGlacial.SetActive(false);
             deathDimension.SetActive(false);
+            heartbeat.SetActive(false);
         }
     }
 
