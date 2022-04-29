@@ -86,6 +86,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider collider)
+    {
+        if(isAShooter == false)
+        {
+            if (collider.CompareTag("Player"))
+            {
+                PlayerHealth playerHealth = collider.GetComponent<PlayerHealth>();
+                playerHealth.TakeDamage(damageOnCollision);
+            }
+
+        }
+    }
+
 public void Hit(int damage)
     {
         enemyLife -= damage;

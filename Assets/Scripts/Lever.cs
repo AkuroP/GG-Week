@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameObject platformToActivate;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -34,6 +24,6 @@ public class Lever : MonoBehaviour
 
     public void ActivateLever()
     {
-        Debug.Log("Lever Activated");
+        platformToActivate.SetActive(true);
     }
 }

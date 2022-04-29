@@ -13,14 +13,14 @@ public class PlatformMovement : MonoBehaviour
     public bool isAffectedByDimShift;
     private Transform posToMove;
     private Player player;
-    private SpriteRenderer platformRenderer;
+    private MeshRenderer platformRenderer;
     // Start is called before the first frame update
     void Start()
     {
         posToMove = finalPoint;
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         deathDimensionPlatformSpeed = platformSpeed / 5;
-        platformRenderer = this.GetComponent<SpriteRenderer>();
+        platformRenderer = this.GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -46,12 +46,12 @@ public class PlatformMovement : MonoBehaviour
                 if(player.lifeOrDeath)
                 {
                     this.transform.position = Vector2.MoveTowards(this.transform.position, posToMove.position, platformSpeed * Time.deltaTime);
-                    platformRenderer.color = Color.white;
+                    platformRenderer.material.color = Color.white;
                 }
                 else
                 {
                     this.transform.position = Vector2.MoveTowards(this.transform.position, posToMove.position, deathDimensionPlatformSpeed * Time.deltaTime);
-                    platformRenderer.color = Color.black;
+                    platformRenderer.material.color = Color.black;
                 }
             }
             else
