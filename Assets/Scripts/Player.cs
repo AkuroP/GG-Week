@@ -266,6 +266,7 @@ public class Player : MonoBehaviour
                         {
                             case "Lever":
                             interactableObj.GetComponent<Lever>().ActivateLever();
+                            interactableObj.GetComponent<Lever>().anim.SetBool("ON", true);
                             break;
                         }
                     }
