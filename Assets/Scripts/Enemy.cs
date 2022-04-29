@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer EnemySprite;
     public GameObject bullet;
     public GameObject bulletParent;
-    public GameObject bulletParent2;
     private Transform player;
+    private Animator enemyAnim;
 
     public bool isAShooter = false;
 
@@ -25,37 +25,47 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyAnim = this.GetComponent<Animator>();
     }
 
     
     void Update()
     {
         if (player != null) { 
+                if(player.position.x < this.transform.position.x)
+                {
+                    EnemySprite.flipX = true;
+
+                }
+                else
+                {
+                    EnemySprite.flipX = false;
+                }
 
                 float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
                 if (distanceFromPlayer < lineOfSite && distanceFromPlayer>shootingRange)
                 {
-                    transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);            
+                    transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);       
+                    enemyAnim.SetBool("Chase", true);     
                 }
-                else if (distanceFromPlayer <= shootingRange && nextFireTime<Time.time)
+                else if (distanceFromPlayer <= shootingRange && nextFireTime<Time.time) 
                 {   
-                    if(player.position.x < this.transform.position.x)
+                    enemyAnim.SetBool("Chase", false);     
+                    enemyAnim.SetTrigger("Attack");
+                    if(isAShooter)
                     {
-                
-                        Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
-                        EnemySprite.flipX = false;
 
-                    }
-                    else
-                    {
-                        Instantiate(bullet, bulletParent2.transform.position, Quaternion.identity);
-                        EnemySprite.flipX = true;
-                    }
                         nextFireTime = Time.time + shootingRate;
+                    }
+                        
                 }
             }
         }
 
+    public void Shoot()
+    {
+        Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
