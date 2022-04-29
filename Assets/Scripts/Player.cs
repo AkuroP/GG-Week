@@ -243,6 +243,7 @@ public class Player : MonoBehaviour
             {
                 if(canAttack)
                 {
+                    animator.SetTrigger("Attack");
                     Collider[] enemiesInRange = new Collider[10];
                     int numbEnemies = Physics.OverlapSphereNonAlloc(hitBoxPoint.transform.position, attackRange, enemiesInRange, enemyLayer);
                     if(numbEnemies > 0)
