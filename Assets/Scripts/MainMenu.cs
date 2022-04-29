@@ -8,6 +8,8 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject button;
 
+
+
     
 
     public GameObject mainMenu;
@@ -15,9 +17,9 @@ public class MainMenu : MonoBehaviour
     
 
     public bool Menu = true;
-    public void PlayGame()
+    public void PlayGame(string scene)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(scene);
     }
 
     public void QuitGame()
