@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8301fe0aca28549459fc79988f036e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portail: {fileID: 0}
+  portail: {fileID: 6516919075024919705}
   player: {fileID: 0}
 --- !u!65 &5636395016287819684
 BoxCollider:
@@ -57,5 +57,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 29.248096, y: 7.874258, z: 1}
-  m_Center: {x: 1.6281688, y: -3.437129, z: 0}
+  m_Size: {x: 401.56055, y: 74.38489, z: 556.4037}
+  m_Center: {x: 130.0316, y: -36.692444, z: 0}

@@ -119,7 +119,10 @@ public class PlayerHealth : MonoBehaviour
         //Player.instance.box.enabled = false;
         Player.instance.tag = "Untagged";
         GameOverManager.instance.OnPlayerDeath();
-        Player.instance.GetComponentInChildren<Camera>().transform.parent = null;
+        if(Player.instance.GetComponentInChildren<Camera>() != null)
+        {
+            Player.instance.GetComponentInChildren<Camera>().transform.parent = null;
+        }
         
 
     }

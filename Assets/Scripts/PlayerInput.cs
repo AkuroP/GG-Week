@@ -132,7 +132,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""cf51eede-d69c-428b-9904-d9f3356d0200"",
-                    ""path"": ""<Joystick>/stick/left"",
+                    ""path"": ""<Joystick>/stick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -143,7 +143,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""aef0ebca-51ad-4979-adfc-15b9451ab0c3"",
-                    ""path"": ""<Joystick>/stick/right"",
+                    ""path"": ""<Joystick>/stick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -187,7 +187,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d621e508-be88-4979-a16c-1db73cacb4a3"",
-                    ""path"": ""<Joystick>/stick/up"",
+                    ""path"": ""<Joystick>/stick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",

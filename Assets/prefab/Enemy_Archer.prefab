@@ -106,7 +106,7 @@ MonoBehaviour:
   EnemySprite: {fileID: 6596102680139862219}
   bullet: {fileID: 6811145874537895222, guid: 2387368744eec7743bd105259d37712d, type: 3}
   bulletParent: {fileID: 6596102681419326058}
-  isAShooter: 0
+  isAShooter: 1
   damageOnCollision: 20
   enemyLife: 2
   healthPoint: 0
